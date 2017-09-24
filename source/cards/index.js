@@ -68,10 +68,6 @@ class Cards {
 	deleteCards() {
 		//
 	}
-
-	readStorage() {
-
-	}
 }
 
 export default new Cards();
