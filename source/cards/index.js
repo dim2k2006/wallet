@@ -1,7 +1,8 @@
-import fs from 'fs';
+import storage from '../storage';
+import isValid from '../../libs/luhnCardValidation';
 
 /**
- * Create a new class Cards
+ * Create a new Cards class
  */
 class Cards {
 	/**
@@ -11,7 +12,6 @@ class Cards {
 		this.getCards = this.getCards.bind(this);
 		this.addCards = this.addCards.bind(this);
 		this.deleteCards = this.deleteCards.bind(this);
-		this.storage = __dirname + '/cards.json';
 
 		return {
 			get: this.getCards,
@@ -26,25 +26,31 @@ class Cards {
 	 * @param {Object} res
 	 */
 	getCards(req, res) {
-		fs.readFile(this.storage, 'utf8', (error, data) => {
-			if (error) {
-				console.log(error);
-
+		storage.get()
+			.then((response) => {
+				res.header('Content-Type', 'application/json');
+				res.status(200);
+				res.send(response);
+			})
+			.catch(() => {
 				res.status(503);
 				res.send('Can not get cards from storage');
-			}
-
-			res.header('Content-Type', 'application/json');
-			res.status(200);
-			res.send(data);
-		});
+			});
 	}
 
 	/**
 	 * Add card to storage
 	 */
 	addCards(req, res) {
-		//
+		const cardNumber = req.body.cardNumber || 0;
+		const balance = req.body.balance;
+
+		if (!isValid(cardNumber)) {
+			res.status(400);
+			res.end('Invalid card number');
+		}
+
+		res.end('success');
 	}
 
 	/**
@@ -52,6 +58,10 @@ class Cards {
 	 */
 	deleteCards() {
 		//
+	}
+
+	readStorage() {
+
 	}
 }
 
