@@ -9,15 +9,18 @@ class Storage {
 	 */
 	constructor() {
 		this.getData = this.getData.bind(this);
+		this.addData = this.addData.bind(this);
 		this.path = __dirname + '/cards.json';
 
 		return {
 			get: this.getData,
+			add: this.addData,
 		};
 	}
 
 	/**
 	 * Get data from storage
+	 * @return {Promise}
 	 */
 	getData() {
 		return new Promise((resolve, reject) => {
@@ -30,6 +33,47 @@ class Storage {
 
 				resolve(data);
 			});
+		});
+	}
+
+	/**
+	 * Add data to storage
+	 * @param {Object} data
+	 * @returns {Promise}
+	 */
+	addData(data) {
+		return new Promise((resolve, reject) => {
+			this.getData()
+				.then((response) => {
+					const responseData = JSON.parse(response);
+					const index = responseData.findIndex((card) => card.cardNumber === data.cardNumber);
+					const result = {cardNumber: '', balance: ''};
+
+					if (index && data.balance) {
+						responseData[index].balance = data.balance;
+
+						result.cardNumber = responseData[index].cardNumber;
+						result.balance = responseData[index].balance;
+					} else {
+						responseData.push(data);
+
+						result.cardNumber = data.cardNumber;
+						result.balance = data.balance;
+					}
+
+					fs.writeFile(this.path, JSON.stringify(responseData), 'utf8', (error) => {
+						if (error) {
+							console.log(`Can not write data to storage, error info: ${error}`);
+
+							reject();
+						}
+
+						resolve(result);
+					});
+				})
+				.catch((error) => {
+					console.log(`Can not get data from storage, error info: ${error}`);
+				});
 		});
 	}
 }

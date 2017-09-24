@@ -50,7 +50,16 @@ class Cards {
 			res.end('Invalid card number');
 		}
 
-		res.end('success');
+		storage.add({cardNumber, balance})
+			.then((response) => {
+				res.header('Content-Type', 'application/json');
+				res.status(200);
+				res.send(response);
+			})
+			.catch(() => {
+				res.status(500);
+				res.end('Server error');
+			});
 	}
 
 	/**
