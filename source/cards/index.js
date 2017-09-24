@@ -43,7 +43,7 @@ class Cards {
 	/**
 	 * Add card to storage
 	 */
-	addCards() {
+	addCards(req, res) {
 		//
 	}
 
