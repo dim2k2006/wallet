@@ -46,14 +46,14 @@ class Storage {
 			this.getData()
 				.then((response) => {
 					const responseData = JSON.parse(response);
-					const index = responseData.findIndex((card) => card.cardNumber === data.cardNumber);
+					const card = responseData.find((card) => card.cardNumber === data.cardNumber);
 					const result = {cardNumber: '', balance: ''};
 
-					if (index && data.balance) {
-						responseData[index].balance = data.balance;
+					if (card) {
+						card.balance = data.balance;
 
-						result.cardNumber = responseData[index].cardNumber;
-						result.balance = responseData[index].balance;
+						result.cardNumber = card.cardNumber;
+						result.balance = card.balance;
 					} else {
 						responseData.push(data);
 
@@ -70,6 +70,8 @@ class Storage {
 
 						resolve(result);
 					});
+
+					resolve(result);
 				})
 				.catch((error) => {
 					console.log(`Can not get data from storage, error info: ${error}`);

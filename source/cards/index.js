@@ -43,7 +43,7 @@ class Cards {
 	 */
 	addCards(req, res) {
 		const cardNumber = req.body.cardNumber || 0;
-		const balance = req.body.balance;
+		const balance = req.body.balance ? parseFloat(req.body.balance) : 0;
 
 		if (!isValid(cardNumber)) {
 			res.status(400);
