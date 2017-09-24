@@ -48,6 +48,7 @@
         "unicode-bom": "error",
         "no-var": "error",
         "semi": 2,
-	  	"no-console": "off"
+	  	"no-console": "off",
+	  	"comma-dangle": [2, "always"]
     }
 }
