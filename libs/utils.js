@@ -9,7 +9,7 @@ const bankUtils = {
 		VISA: 'visa',
 		MAESTRO: 'maestro',
 		MASTERCARD: 'mastercard',
-		MIR: 'mir'
+		MIR: 'mir',
 	},
 
 	/**
@@ -75,7 +75,7 @@ const bankUtils = {
 			}
 		}
 		return formattedCardNumber.join('');
-	}
+	},
 };
 
-module.exports = bankUtils;
+export default bankUtils;
