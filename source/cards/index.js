@@ -48,6 +48,8 @@ class Cards {
 		if (!isValid(cardNumber)) {
 			res.status(400);
 			res.end('Invalid card number');
+
+			return false;
 		}
 
 		storage.add({cardNumber, balance})
