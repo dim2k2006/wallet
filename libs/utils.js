@@ -1,6 +1,5 @@
 'use strict';
 
-
 const bankUtils = {
 	/**
 	 * Типы банковскиx карт
@@ -12,7 +11,6 @@ const bankUtils = {
 		MASTERCARD: 'mastercard',
 		MIR: 'mir'
 	},
-
 
 	/**
 	 * Проверяет тип карты
@@ -63,11 +61,14 @@ const bankUtils = {
 	 */
 	formatCardNumber(cardNumber, delimeter) {
 		let formattedCardNumber = [];
+
 		delimeter = delimeter || '\u00A0';
+
 		if (cardNumber) {
 			while (cardNumber && typeof cardNumber === 'string') {
 				formattedCardNumber.push(cardNumber.substr(0, 4));
 				cardNumber = cardNumber.substr(4);
+
 				if (cardNumber) {
 					formattedCardNumber.push(delimeter);
 				}
