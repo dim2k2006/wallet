@@ -1,12 +1,9 @@
-import Cards from '../../models/cards';
-
 /**
  * Get all cards
- * @param req
- * @param res
+ * @param {Object} ctx
  */
-const getCardsController = (req, res) => {
-	res.json(Cards.get());
+const getCardsController = async(ctx) => {
+	ctx.body = await ctx.Cards.get();
 };
 
 export default getCardsController;

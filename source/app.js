@@ -3,7 +3,9 @@ import serve from 'koa-static';
 import getCardsController from './controllers/cards/get';
 import addCardController from './controllers/cards/add';
 import deleteCardController from './controllers/cards/delete';
+
 import ApplicationError from '../libs/applicationError';
+import Cards from './models/cards';
 
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser')();
@@ -17,8 +19,11 @@ router.delete('/cards/:id', deleteCardController);
 // logger
 app.use(async (ctx, next) => {
 	const start = Date.now();
+
 	await next();
+
 	const ms = Date.now() - start;
+
 	console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
@@ -32,6 +37,12 @@ app.use(async (ctx, next) => {
 		ctx.status = err instanceof ApplicationError ? err.status : 500;
 		ctx.body = `Error [${err.message}] :(`;
 	}
+});
+
+// init model
+app.use(async (ctx, next) => {
+	ctx.Cards = Cards;
+	await next();
 });
 
 app.use(bodyParser);

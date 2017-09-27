@@ -29,7 +29,7 @@ class Cards {
 	 * @returns {Array}
 	 * @private
 	 */
-	_getAll() {
+	async _getAll() {
 		return this._data;
 	}
 
