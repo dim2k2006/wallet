@@ -10,5 +10,6 @@ app.use(express.static('public'));
 
 app.get('/cards', cards.get);
 app.post('/cards', cards.add);
+app.delete('/cards/:id', cards.del);
 
 export default app;

@@ -67,8 +67,12 @@ class Cards {
 	/**
 	 * Delete card from storage
 	 */
-	deleteCards() {
-		//
+	deleteCards(req, res) {
+		const id = req.param.id;
+
+		console.log(id);
+
+		res.end('delete');
 	}
 }
 

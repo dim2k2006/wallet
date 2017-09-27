@@ -15,6 +15,7 @@ class Storage {
 		return {
 			get: this.getData,
 			add: this.addData,
+			del: this.deleteData,
 		};
 	}
 
@@ -72,6 +73,24 @@ class Storage {
 					});
 
 					resolve(result);
+				})
+				.catch((error) => {
+					console.log(`Can not get data from storage, error info: ${error}`);
+				});
+		});
+	}
+
+	/**
+	 * Delete data from storage
+	 * @param {String} id
+	 */
+	deleteData(id) {
+		return new Promise((resolve, reject) => {
+			this.getData()
+				.then((response) => {
+					const responseData = JSON.parse(response);
+
+					// delete card
 				})
 				.catch((error) => {
 					console.log(`Can not get data from storage, error info: ${error}`);
