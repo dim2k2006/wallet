@@ -1,22 +1,13 @@
-import Cards from '../../models/cards';
-
 /**
  * Add card
- * @param req
- * @param res
+ * @param {Object} ctx
  */
-const AddCardController = (req, res) => {
-	const card = req.body;
+const AddCardController = async(ctx) => {
+	const card = ctx.request.body;
+	const newCard = await ctx.Cards.add(card);
 
-	card.balance = parseFloat(card.balance);
-
-	try {
-		const newCard = Cards.add(card);
-
-		res.status(201).json(newCard);
-	} catch (err) {
-		res.sendStatus(err.status);
-	}
+	ctx.status = 201;
+	ctx.body = newCard;
 };
 
 export default AddCardController;
