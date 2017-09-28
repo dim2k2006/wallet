@@ -1,6 +1,6 @@
 /**
  * Delete card
- * @param ctx
+ * @param {Object} ctx
  */
 const deleteCardController = async(ctx) => {
 	const cardId = Number(ctx.params.id);
