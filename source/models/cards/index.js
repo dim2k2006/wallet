@@ -57,7 +57,7 @@ class Cards {
 	 * Delete card
 	 * @private
 	 */
-	_delete(id) {
+	async _delete(id) {
 		const card = this._data.find((item) => item.id === id);
 
 		if (!card) {
@@ -67,7 +67,7 @@ class Cards {
 		const cardIndex = this._data.indexOf(card);
 
 		this._data.splice(cardIndex, 1);
-		this._saveUpdates();
+		await this._saveUpdates();
 	}
 
 	/**

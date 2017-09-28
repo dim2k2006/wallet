@@ -1,20 +1,12 @@
-import Cards from '../../models/cards';
-
 /**
  * Delete card
- * @param req
- * @param res
+ * @param ctx
  */
-const deleteCardController = (req, res) => {
-	const cardId = Number(req.params.id);
+const deleteCardController = async(ctx) => {
+	const cardId = Number(ctx.params.id);
 
-	try {
-		Cards.del(cardId);
-
-		res.sendStatus(200);
-	} catch (err) {
-		res.sendStatus(err.status);
-	}
+	await ctx.Cards.del(cardId);
+	ctx.status = 200;
 };
 
 export default deleteCardController;
