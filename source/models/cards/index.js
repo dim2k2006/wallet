@@ -29,7 +29,7 @@ class Cards {
 	 * @returns {Array}
 	 * @private
 	 */
-	_getAll() {
+	async _getAll() {
 		return this._data;
 	}
 
@@ -39,13 +39,13 @@ class Cards {
 	 * @returns {Object}
 	 * @private
 	 */
-	_add(card) {
+	async _add(card) {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
 
 		if (isDataValid) {
 			card.id = this._data.reduce((max, item) => Math.max(max, item.id), 0) + 1;
 			this._data.push(card);
-			this._saveUpdates();
+			await this._saveUpdates();
 
 			return card;
 		} else {
@@ -57,7 +57,7 @@ class Cards {
 	 * Delete card
 	 * @private
 	 */
-	_delete(id) {
+	async _delete(id) {
 		const card = this._data.find((item) => item.id === id);
 
 		if (!card) {
@@ -67,7 +67,7 @@ class Cards {
 		const cardIndex = this._data.indexOf(card);
 
 		this._data.splice(cardIndex, 1);
-		this._saveUpdates();
+		await this._saveUpdates();
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Cards {
 	 * @private
 	 */
 	_saveUpdates() {
-		fs.writeFileSync(dataSource, JSON.stringify(this._data, null, 4));
+		return new Promise(resolve => fs.writeFile(dataSource, JSON.stringify(this._data, null, 4), resolve));
 	}
 }
 
