@@ -50,4 +50,4 @@ class Cards extends FileModel {
 	}
 }
 
-export default new Cards;
+export default Cards;

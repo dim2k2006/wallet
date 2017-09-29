@@ -1,7 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-
-const Model = require('./model');
+import fs from 'fs';
+import path from 'path';
+import Model from './model';
 
 /**
  * Create a new FileModel class
