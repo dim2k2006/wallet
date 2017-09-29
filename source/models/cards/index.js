@@ -22,8 +22,8 @@ class Cards extends FileModel {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
 
 		if (isDataValid) {
-			card.id = this._data.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-			this._data.push(card);
+			card.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+			this._dataSource.push(card);
 			await this._saveUpdates();
 
 			return card;
@@ -37,15 +37,15 @@ class Cards extends FileModel {
 	 * @private
 	 */
 	async remove(id) {
-		const card = this._data.find((item) => item.id === id);
+		const card = this._dataSource.find((item) => item.id === id);
 
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
 		}
 
-		const cardIndex = this._data.indexOf(card);
+		const cardIndex = this._dataSource.indexOf(card);
 
-		this._data.splice(cardIndex, 1);
+		this._dataSource.splice(cardIndex, 1);
 		await this._saveUpdates();
 	}
 }
