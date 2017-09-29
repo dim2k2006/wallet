@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import serve from 'koa-static';
 import getCardsController from './controllers/cards/get';
-import addCardController from './controllers/cards/add';
+import createCardController from './controllers/cards/create';
 import deleteCardController from './controllers/cards/delete';
 
 import ApplicationError from '../libs/applicationError';
@@ -13,7 +13,7 @@ const bodyParser = require('koa-bodyparser')();
 const app = new Koa();
 
 router.get('/cards', getCardsController);
-router.post('/cards', addCardController);
+router.post('/cards', createCardController);
 router.delete('/cards/:id', deleteCardController);
 
 // logger
