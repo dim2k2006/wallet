@@ -1,11 +1,11 @@
 import Koa from 'koa';
 import serve from 'koa-static';
 import getCardsController from './controllers/cards/get';
-import addCardController from './controllers/cards/add';
-import deleteCardController from './controllers/cards/delete';
+import createCardController from './controllers/cards/create';
+import removeCardController from './controllers/cards/remove';
 
 import ApplicationError from '../libs/applicationError';
-import Cards from './models/cards';
+import CardsModel from './models/cards';
 
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser')();
@@ -13,8 +13,8 @@ const bodyParser = require('koa-bodyparser')();
 const app = new Koa();
 
 router.get('/cards', getCardsController);
-router.post('/cards', addCardController);
-router.delete('/cards/:id', deleteCardController);
+router.post('/cards', createCardController);
+router.delete('/cards/:id', removeCardController);
 
 // logger
 app.use(async (ctx, next) => {
@@ -39,9 +39,10 @@ app.use(async (ctx, next) => {
 	}
 });
 
-// init model
+// init CardsModel
 app.use(async (ctx, next) => {
-	ctx.Cards = Cards;
+	ctx.CardsModel = new CardsModel();
+	await ctx.CardsModel.loadFile();
 	await next();
 });
 
