@@ -2,7 +2,7 @@ import Koa from 'koa';
 import serve from 'koa-static';
 import getCardsController from './controllers/cards/get';
 import createCardController from './controllers/cards/create';
-import deleteCardController from './controllers/cards/delete';
+import removeCardController from './controllers/cards/remove';
 
 import ApplicationError from '../libs/applicationError';
 import CardsModel from './models/cards';
@@ -14,7 +14,7 @@ const app = new Koa();
 
 router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
-router.delete('/cards/:id', deleteCardController);
+router.delete('/cards/:id', removeCardController);
 
 // logger
 app.use(async (ctx, next) => {
