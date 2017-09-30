@@ -16,7 +16,6 @@ class Cards extends FileModel {
 	 * Create new card
 	 * @param {Object} card
 	 * @returns {Object}
-	 * @private
 	 */
 	async create(card) {
 		const isDataValid = card && card.hasOwnProperty('cardNumber') && card.hasOwnProperty('balance');
@@ -34,7 +33,7 @@ class Cards extends FileModel {
 
 	/**
 	 * Remove card
-	 * @private
+	 * @param {Number} id
 	 */
 	async remove(id) {
 		const card = this._dataSource.find((item) => item.id === id);
