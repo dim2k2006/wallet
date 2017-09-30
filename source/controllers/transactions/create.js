@@ -5,7 +5,7 @@
 const createTransactionController = async(ctx) => {
 	const transaction = ctx.request.body;
 
-	transaction.cardId = ctx.params.id;
+	transaction.cardId = Number(ctx.params.id);
 
 	const newTransaction = await ctx.TransactionsModel.create(transaction);
 

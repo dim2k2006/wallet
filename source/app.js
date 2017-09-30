@@ -18,11 +18,7 @@ const bodyParser = require('koa-bodyparser')();
 const app = new Koa();
 
 // Save id param to ctx.params.id
-router.param('id', (id, ctx, next) => {
-	ctx.params.id = Number(id);
-
-	next();
-});
+router.param('id', (id, ctx, next) => next());
 
 router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
