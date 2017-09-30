@@ -5,7 +5,7 @@ import getCardsController from './controllers/cards/get';
 import createCardController from './controllers/cards/create';
 import removeCardController from './controllers/cards/remove';
 
-
+import getTransactionsController from './controllers/transactions/get';
 import createTransactionController from './controllers/transactions/create';
 
 import ApplicationError from '../libs/applicationError';
@@ -28,6 +28,7 @@ router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
 router.delete('/cards/:id', removeCardController);
 
+router.get('/cards/:id/transactions/', getTransactionsController);
 router.post('/cards/:id/transactions/', createTransactionController);
 
 // Logger
