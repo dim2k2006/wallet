@@ -1,3 +1,4 @@
+import { validate, presence } from 'property-validator';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
 
@@ -18,17 +19,32 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(transactionData) {
-		transactionData.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-		this._dataSource.push(transactionData);
-		await this._saveUpdates();
+		const isDataValid = validate(transactionData, [
+			presence('id'),
+			presence('cardId'),
+			presence('type'),
+			presence('data'),
+			presence('time'),
+			presence('sum'),
+		]);
 
-		return transactionData;
+		console.log(isDataValid);
+
+		if (isDataValid) {
+			transactionData.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+			this._dataSource.push(transactionData);
+			await this._saveUpdates();
+
+			return transactionData;
+		} else {
+			throw new ApplicationError('Card data is invalid', 400);
+		}
 	}
 
 	/**
 	 * Return all transactions for card
 	 * @param {Number} cardId
-	 * @returns {Promise.<void>}
+	 * @returns {Object}
 	 */
 	async get(cardId) {
 		const sourceData = await this.getAll();
