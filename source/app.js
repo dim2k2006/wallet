@@ -1,22 +1,36 @@
 import Koa from 'koa';
 import serve from 'koa-static';
+
 import getCardsController from './controllers/cards/get';
 import createCardController from './controllers/cards/create';
 import removeCardController from './controllers/cards/remove';
 
+
+import createTransactionController from './controllers/transactions/create';
+
 import ApplicationError from '../libs/applicationError';
 import CardsModel from './models/cards';
+import TransactionsModel from './models/transactions';
 
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser')();
 
 const app = new Koa();
 
+// Save id param to ctx.params.id
+router.param('id', (id, ctx, next) => {
+	ctx.params.id = Number(id);
+
+	next();
+});
+
 router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
 router.delete('/cards/:id', removeCardController);
 
-// logger
+router.post('/cards/:id/transactions/', createTransactionController);
+
+// Logger
 app.use(async (ctx, next) => {
 	const start = Date.now();
 
@@ -27,7 +41,7 @@ app.use(async (ctx, next) => {
 	console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-// error handler
+// Error handler
 app.use(async (ctx, next) => {
 	try {
 		await next();
@@ -39,10 +53,17 @@ app.use(async (ctx, next) => {
 	}
 });
 
-// init CardsModel
+// Init CardsModel
 app.use(async (ctx, next) => {
 	ctx.CardsModel = new CardsModel();
 	await ctx.CardsModel.loadFile();
+	await next();
+});
+
+// Init TransactionsModel
+app.use(async (ctx, next) => {
+	ctx.TransactionsModel = new TransactionsModel();
+	await ctx.TransactionsModel.loadFile();
 	await next();
 });
 

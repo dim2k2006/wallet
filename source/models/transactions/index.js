@@ -20,15 +20,12 @@ class Transactions extends FileModel {
 	 */
 	async create(transactionData) {
 		const isDataValid = validate(transactionData, [
-			presence('id'),
 			presence('cardId'),
 			presence('type'),
 			presence('data'),
 			presence('time'),
 			presence('sum'),
 		]);
-
-		console.log(isDataValid);
 
 		if (isDataValid) {
 			transactionData.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
@@ -37,7 +34,7 @@ class Transactions extends FileModel {
 
 			return transactionData;
 		} else {
-			throw new ApplicationError('Card data is invalid', 400);
+			throw new ApplicationError('Transaction data is invalid', 400);
 		}
 	}
 
