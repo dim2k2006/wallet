@@ -1,4 +1,5 @@
 import { validate, presence } from 'property-validator';
+import luhn from '../../../libs/luhnCardValidation';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
 
@@ -22,6 +23,7 @@ class Cards extends FileModel {
 		const data = validate(card, [
 			presence('cardNumber'),
 			presence('balance'),
+			luhn('cardNumber'),
 		]);
 
 		if (data.valid) {
