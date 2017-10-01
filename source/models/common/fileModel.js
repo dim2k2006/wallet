@@ -23,9 +23,9 @@ class FileModel extends Model {
 	async loadFile() {
 		if (!this._dataSource) {
 			await new Promise((resolve, reject) => {
-				fs.readFile(this._dataSourceFile, (error, data) => {
-					if (error) {
-						return reject(error);
+				fs.readFile(this._dataSourceFile, (fileError, data) => {
+					if (fileError) {
+						return reject(fileError);
 					}
 
 					try {
@@ -47,7 +47,7 @@ class FileModel extends Model {
 	 * @returns {Promise.<null|*>}
 	 */
 	async getAll() {
-		return await this.loadFile();
+		return this.loadFile();
 	}
 
 	/**
@@ -55,7 +55,8 @@ class FileModel extends Model {
 	 * @private
 	 */
 	async _saveUpdates() {
-		return new Promise(resolve => fs.writeFile(this._dataSourceFile, JSON.stringify(this._dataSource, null, 4), resolve));
+		return new Promise((resolve) =>
+			fs.writeFile(this._dataSourceFile, JSON.stringify(this._dataSource, null, 4), resolve));
 	}
 }
 

@@ -1,4 +1,5 @@
-/*eslint-disable no-empty-function, no-unused-vars*/
+/* eslint-disable no-empty-function, no-unused-vars, class-methods-use-this */
+
 /**
  * Create a new Model class
  */
@@ -31,4 +32,4 @@ class Model {
 }
 
 export default Model;
-/*eslint-enable no-empty-function, no-unused-vars*/
+/* eslint-enable no-empty-function, no-unused-vars, class-methods-use-this */
