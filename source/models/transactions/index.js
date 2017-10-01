@@ -1,4 +1,4 @@
-import { validate, presence } from 'property-validator';
+import {validate, presence} from 'property-validator';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
 
@@ -19,7 +19,10 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(transactionData) {
-		const data = validate(transactionData, [
+		const id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+		const newTransaction = {...transactionData, id};
+
+		const data = validate(newTransaction, [
 			presence('cardId'),
 			presence('type'),
 			presence('data'),
@@ -28,14 +31,13 @@ class Transactions extends FileModel {
 		]);
 
 		if (data.valid) {
-			transactionData.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-			this._dataSource.push(transactionData);
+			this._dataSource.push(newTransaction);
 			await this._saveUpdates();
-
-			return transactionData;
 		} else {
 			throw new ApplicationError('Transaction data is invalid', 400);
 		}
+
+		return newTransaction;
 	}
 
 	/**
@@ -53,6 +55,7 @@ class Transactions extends FileModel {
 	/**
 	 * Remove transaction
 	 */
+	// eslint-disable-next-line class-methods-use-this
 	async remove() {
 		throw new ApplicationError('Transactions removal is forbidden', 403);
 	}
