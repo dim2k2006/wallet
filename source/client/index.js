@@ -1,1 +1,1 @@
-console.log('test webpack 5');
+console.log('test webpack 3');
