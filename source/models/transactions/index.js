@@ -19,7 +19,7 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(transactionData) {
-		const isDataValid = validate(transactionData, [
+		const data = validate(transactionData, [
 			presence('cardId'),
 			presence('type'),
 			presence('data'),
@@ -27,7 +27,7 @@ class Transactions extends FileModel {
 			presence('sum'),
 		]);
 
-		if (isDataValid) {
+		if (data.valid) {
 			transactionData.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
 			this._dataSource.push(transactionData);
 			await this._saveUpdates();
