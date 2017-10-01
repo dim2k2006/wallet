@@ -2,7 +2,7 @@
  * Create new transaction
  * @param {Object} ctx
  */
-const createTransactionController = async(ctx) => {
+const createTransactionController = async (ctx) => {
 	const transaction = ctx.request.body;
 
 	transaction.cardId = Number(ctx.params.id);
