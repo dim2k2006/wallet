@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
+const sass = require('./webpack/sass');
 
 const PATHS = {
 	source: path.join(__dirname, 'source', 'client'),
@@ -27,7 +28,8 @@ module.exports = function(env) {
 	if (env === 'development') {
 		return merge([
 			common,
-			devServer()
+			devServer(),
+			sass()
 		]);
 	}
 };
