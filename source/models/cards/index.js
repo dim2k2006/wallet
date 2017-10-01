@@ -1,4 +1,4 @@
-import { validate, presence } from 'property-validator';
+import {validate, presence} from 'property-validator';
 import luhn from '../../../libs/luhnCardValidation';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
@@ -20,18 +20,20 @@ class Cards extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(card) {
-		const data = validate(card, [
+		const id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+		const newCard = {...card, id};
+
+		const data = validate(newCard, [
 			presence('cardNumber'),
 			presence('balance'),
 			luhn('cardNumber'),
 		]);
 
 		if (data.valid) {
-			card.id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-			this._dataSource.push(card);
+			this._dataSource.push(newCard);
 			await this._saveUpdates();
 
-			return card;
+			return newCard;
 		} else {
 			throw new ApplicationError('Card data is invalid', 400);
 		}
