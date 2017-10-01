@@ -32,11 +32,11 @@ class Cards extends FileModel {
 		if (data.valid) {
 			this._dataSource.push(newCard);
 			await this._saveUpdates();
-
-			return newCard;
 		} else {
 			throw new ApplicationError('Card data is invalid', 400);
 		}
+
+		return newCard;
 	}
 
 	/**
