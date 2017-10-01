@@ -1,6 +1,6 @@
 import Koa from 'koa';
-import router from './routes';
 import serve from 'koa-static';
+import router from './routes';
 
 import logger from './middleware/logger';
 import error from './middleware/error';

@@ -2,7 +2,7 @@
  * Create new card
  * @param {Object} ctx
  */
-const createCardController = async(ctx) => {
+const createCardController = async (ctx) => {
 	const card = ctx.request.body;
 	const newCard = await ctx.CardsModel.create(card);
 
