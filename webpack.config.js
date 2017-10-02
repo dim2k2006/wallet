@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
@@ -18,7 +19,12 @@ const common = merge([
 			path: PATHS.build,
 			filename: 'js/[name].js'
 		},
-		plugins: [new HtmlWebpackPlugin()]
+		plugins: [
+			new HtmlWebpackPlugin(),
+			new webpack.optimize.CommonsChunkPlugin({
+				name: 'common'
+			})
+		]
 	}
 ]);
 
