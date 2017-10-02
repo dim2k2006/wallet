@@ -25,6 +25,7 @@
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
     "koa-static": "^4.0.1",
+    "normalize.css": "^7.0.0",
     "property-validator": "^0.8.0"
   },
   "devDependencies": {
