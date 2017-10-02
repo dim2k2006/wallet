@@ -21,6 +21,7 @@
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.2",
     "express": "^4.15.3",
+    "jquery": "^3.2.1",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",

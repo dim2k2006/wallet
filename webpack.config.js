@@ -23,6 +23,10 @@ const common = merge([
 			new HtmlWebpackPlugin(),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'common'
+			}),
+			new webpack.ProvidePlugin({
+				$: 'jquery',
+				jQuery: 'jquery'
 			})
 		]
 	}
