@@ -1,3 +1,8 @@
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import App from '../../public/js/server';
+// import App from '../../source/client/components/App';
+
 // Cards controllers
 import getCardsController from '../controllers/cards/get';
 import createCardController from '../controllers/cards/create';
@@ -13,6 +18,15 @@ const router = require('koa-router')();
 router.param('id', (id, ctx, next) => next());
 
 // Routes
+router.get('/', async (ctx) => {
+	const markup = ReactDOMServer.renderToString(<App />);
+
+	await ctx.render('../client/index', {
+		markup: markup
+	});
+	// ctx.body = await ReactDOMServer.renderToString(<App />);
+});
+
 router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
 router.delete('/cards/:id', removeCardController);

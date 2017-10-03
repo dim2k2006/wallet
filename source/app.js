@@ -1,5 +1,6 @@
 import Koa from 'koa';
 import serve from 'koa-static';
+import views from 'koa-views';
 import router from './routes';
 
 import logger from './middleware/logger';
@@ -12,6 +13,7 @@ const bodyParser = require('koa-bodyparser')();
 const app = new Koa();
 
 // Middleware
+app.use(views(`${__dirname}/client`, {extension: 'ejs'}));
 app.use(logger);
 app.use(error);
 app.use(initCardsModel);

@@ -25,7 +25,6 @@ const common = merge([
 		devtool: 'source-map',
 		plugins: [
 			new HtmlWebpackPlugin({
-				title: 'Hello, Node School App!',
 				template: './source/client/index.ejs'
 			})
 		]
