@@ -5,9 +5,8 @@
   "author": "",
   "scripts": {
     "start": "webpack-dev-server --env development",
-    "build": "webpack --env production",
-    "server": "webpack --env server",
-    "api": "node ./source/index.js",
+    "build": "webpack --env production && webpack --env server",
+    "server": "node ./source/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
