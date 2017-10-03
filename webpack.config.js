@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const devServer = require('./webpack/devserver');
 const css = require('./webpack/css');
 const extractCss = require('./webpack/css.extract');
@@ -21,17 +22,13 @@ const common = merge([
 			path: PATHS.build,
 			filename: 'js/bundle.js'
 		},
-		devtool: 'source-map'
-		// plugins: [
-		// 	new HtmlWebpackPlugin(),
-		// 	new webpack.optimize.CommonsChunkPlugin({
-		// 		name: 'common'
-		// 	}),
-		// 	new webpack.ProvidePlugin({
-		// 		$: 'jquery',
-		// 		jQuery: 'jquery'
-		// 	})
-		// ]
+		devtool: 'source-map',
+		plugins: [
+			new HtmlWebpackPlugin({
+				title: 'Hello, Node School App!',
+				template: './source/client/index.ejs'
+			})
+		]
 	},
 	images(),
 	babel()
