@@ -41,6 +41,8 @@ const server = merge([
 	{
 		entry: `${PATHS.source}/components/App/index.js`,
 		output: {
+			library: 'umd',
+			libraryTarget: 'umd',
 			path: PATHS.build,
 			filename: 'js/server.js'
 		}
