@@ -2,9 +2,9 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
-const sass = require('./webpack/sass');
 const css = require('./webpack/css');
 const extractCss = require('./webpack/css.extract');
+const ignoreCss = require('./webpack/css.ignore');
 const uglifyJS = require('./webpack/js.uglify');
 const images = require('./webpack/images');
 const babel = require('./webpack/js.babel');
@@ -37,6 +37,17 @@ const common = merge([
 	babel()
 ]);
 
+const server = merge([
+	{
+		entry: `${PATHS.source}/components/App/index.js`,
+		output: {
+			path: PATHS.build,
+			filename: 'js/server.js'
+		}
+	},
+	babel()
+]);
+
 module.exports = function (env) {
 	if (env === 'production') {
 		return merge([
@@ -50,8 +61,14 @@ module.exports = function (env) {
 		return merge([
 			common,
 			devServer(),
-			sass(),
 			css()
+		]);
+	}
+
+	if (env === 'server') {
+		return merge([
+			server,
+			ignoreCss()
 		]);
 	}
 };

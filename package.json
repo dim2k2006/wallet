@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --env development",
     "build": "webpack --env production",
-    "server": "node ./source/index.js",
+    "server": "webpack --env server",
+    "api": "node ./source/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -56,6 +57,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "html-webpack-plugin": "^2.30.1",
+    "ignore-loader": "^0.1.2",
     "moment": "^2.18.1",
     "node-sass": "^4.5.3",
     "nodemon": "^1.12.1",
