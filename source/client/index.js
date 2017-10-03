@@ -1,10 +1,5 @@
-import './menu';
-import 'normalize.css';
-import './styles.scss';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {App} from './components';
 
-const a = 'test';
-
-console.log('test webpack index');
-console.log($);
-console.log(jQuery);
-console.log(`${a} webpack template`);
+ReactDOM.render(<App />, document.getElementById('root'));

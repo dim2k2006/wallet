@@ -1,18 +1,17 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
-const sass = require('./webpack/sass');
 const css = require('./webpack/css');
 const extractCss = require('./webpack/css.extract');
+const ignoreCss = require('./webpack/css.ignore');
 const uglifyJS = require('./webpack/js.uglify');
 const images = require('./webpack/images');
 const babel = require('./webpack/js.babel');
 
 const PATHS = {
 	source: path.join(__dirname, 'source', 'client'),
-	build: path.join(__dirname, 'build'),
+	build: path.join(__dirname, 'public'),
 };
 
 const common = merge([
@@ -20,24 +19,36 @@ const common = merge([
 		entry: `${PATHS.source}/index.js`,
 		output: {
 			path: PATHS.build,
-			filename: 'js/[name].js'
+			filename: 'js/bundle.js'
 		},
-		plugins: [
-			new HtmlWebpackPlugin(),
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'common'
-			}),
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				jQuery: 'jquery'
-			})
-		]
+		devtool: 'source-map'
+		// plugins: [
+		// 	new HtmlWebpackPlugin(),
+		// 	new webpack.optimize.CommonsChunkPlugin({
+		// 		name: 'common'
+		// 	}),
+		// 	new webpack.ProvidePlugin({
+		// 		$: 'jquery',
+		// 		jQuery: 'jquery'
+		// 	})
+		// ]
 	},
 	images(),
 	babel()
 ]);
 
-module.exports = function(env) {
+const server = merge([
+	{
+		entry: `${PATHS.source}/components/App/index.js`,
+		output: {
+			path: PATHS.build,
+			filename: 'js/server.js'
+		}
+	},
+	babel()
+]);
+
+module.exports = function (env) {
 	if (env === 'production') {
 		return merge([
 			common,
@@ -50,8 +61,14 @@ module.exports = function(env) {
 		return merge([
 			common,
 			devServer(),
-			sass(),
 			css()
+		]);
+	}
+
+	if (env === 'server') {
+		return merge([
+			server,
+			ignoreCss()
 		]);
 	}
 };
