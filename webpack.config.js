@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
 const sass = require('./webpack/sass');
@@ -22,6 +21,7 @@ const common = merge([
 			path: PATHS.build,
 			filename: 'js/bundle.js'
 		},
+		devtool: 'source-map'
 		// plugins: [
 		// 	new HtmlWebpackPlugin(),
 		// 	new webpack.optimize.CommonsChunkPlugin({
@@ -37,7 +37,7 @@ const common = merge([
 	babel()
 ]);
 
-module.exports = function(env) {
+module.exports = function (env) {
 	if (env === 'production') {
 		return merge([
 			common,

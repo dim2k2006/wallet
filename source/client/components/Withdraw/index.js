@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 
-import {Card} from '../Card';
-import {Title} from '../Title';
-import {Button} from '../Button';
-import {Island} from '../Island';
-import {Input} from '../Input';
+import Card from '../Card';
+import Title from '../Title';
+import Button from '../Button';
+import Island from '../Island';
+import Input from '../Input';
 
 const WithdrawTitle = styled(Title)`
 	text-align: center;

@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import styled from 'emotion/react';
 import {injectGlobal} from 'emotion';
 import CardInfo from 'card-info';
-import {CardsBar} from '../CardsBar';
-import {Header} from '../Header';
-import {History} from '../History';
-import {Prepaid} from '../Prepaid';
-import {MobilePayment} from '../MobilePayment';
-import {Withdraw} from '../Withdraw';
+import CardsBar from '../CardsBar';
+import Header from '../Header';
+import History from '../History';
+import Prepaid from '../Prepaid';
+import MobilePayment from '../MobilePayment';
+import Withdraw from '../Withdraw';
 
 import './fonts.css';
 

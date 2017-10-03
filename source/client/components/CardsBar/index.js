@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
-import {Card} from '../Card';
+import Card from '../Card';
 
 const Layout = styled.div`
 	display: flex;

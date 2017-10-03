@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'emotion/react';
 import PropTypes from 'prop-types';
 
-import {Island} from '../Island';
-import {Title} from '../Title';
+import Island from '../Island';
+import Title from '../Title';
 
 const PrepaidLayout = styled(Island)`
 	width: 350px;

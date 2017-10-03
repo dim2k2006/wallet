@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 import moment from 'moment';
 
-import {Island} from '../Island';
+import Island from '../Island';
 
 const HistoryLayout = styled(Island)`
 	width: 530px;
