@@ -12,7 +12,7 @@ const babel = require('./webpack/js.babel');
 
 const PATHS = {
 	source: path.join(__dirname, 'source', 'client'),
-	build: path.join(__dirname, 'build'),
+	build: path.join(__dirname, 'public'),
 };
 
 const common = merge([
@@ -20,7 +20,7 @@ const common = merge([
 		entry: `${PATHS.source}/index.js`,
 		output: {
 			path: PATHS.build,
-			filename: 'js/[name].js'
+			filename: 'js/bundle.js'
 		},
 		plugins: [
 			new HtmlWebpackPlugin(),
