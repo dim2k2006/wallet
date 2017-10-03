@@ -22,16 +22,16 @@ const common = merge([
 			path: PATHS.build,
 			filename: 'js/bundle.js'
 		},
-		plugins: [
-			new HtmlWebpackPlugin(),
-			new webpack.optimize.CommonsChunkPlugin({
-				name: 'common'
-			}),
-			new webpack.ProvidePlugin({
-				$: 'jquery',
-				jQuery: 'jquery'
-			})
-		]
+		// plugins: [
+		// 	new HtmlWebpackPlugin(),
+		// 	new webpack.optimize.CommonsChunkPlugin({
+		// 		name: 'common'
+		// 	}),
+		// 	new webpack.ProvidePlugin({
+		// 		$: 'jquery',
+		// 		jQuery: 'jquery'
+		// 	})
+		// ]
 	},
 	images(),
 	babel()

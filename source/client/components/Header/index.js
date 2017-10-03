@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
-import {Title, UserInfo} from './';
+import {Title} from '../Title';
+import {UserInfo} from '../UserInfo';
 
 const HeaderLayout = styled.header`
 	display: flex;

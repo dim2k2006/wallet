@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
-
-import {Island, Title, Button, Input} from './';
+import {Island} from '../Island';
+import {Title} from '../Title';
+import {Button} from '../Button';
+import {Input} from '../Input';
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;

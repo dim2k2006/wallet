@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import PrepaidContract from './PrepaidContract';
-import PrepaidSuccess from './PrepaidSuccess';
+import PrepaidContract from '../PrepaidContract';
+import PrepaidSuccess from '../PrepaidSuccess';
 
 /**
  * Класс компонента Prepaid

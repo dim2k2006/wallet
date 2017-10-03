@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'emotion/react';
 import PropTypes from 'prop-types';
 
-import {Island} from './';
+import {Island} from '../Island';
 
 const MobilePaymentLayout = styled(Island)`
 	width: 440px;

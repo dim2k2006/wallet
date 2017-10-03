@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import MobilePaymentContract from './MobilePaymentContract';
-import MobilePaymentSuccess from './MobilePaymentSuccess';
+import MobilePaymentContract from '../MobilePaymentContract';
+import MobilePaymentSuccess from '../MobilePaymentSuccess';
 
 /**
  * Класс компонента MobilePayment
