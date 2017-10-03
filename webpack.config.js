@@ -68,6 +68,7 @@ module.exports = function (env) {
 	if (env === 'server') {
 		return merge([
 			server,
+			uglifyJS(),
 			ignoreCss()
 		]);
 	}
