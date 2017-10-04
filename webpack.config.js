@@ -25,6 +25,7 @@ const common = merge([
 		devtool: 'source-map',
 		plugins: [
 			new HtmlWebpackPlugin({
+				inject: false,
 				template: './source/client/index.ejs'
 			})
 		]
