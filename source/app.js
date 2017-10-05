@@ -10,6 +10,8 @@ import initTransactionsModel from './middleware/initTransactionsModel';
 
 const bodyParser = require('koa-bodyparser')();
 
+// const logger = require('../libs/logger')('wallet-app');
+
 const app = new Koa();
 
 // Middleware
