@@ -34,7 +34,8 @@
     "prop-types": "^15.6.0",
     "property-validator": "^0.8.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "serialize-javascript": "^1.4.0"
   },
   "devDependencies": {
     "antd": "^2.13.4",
@@ -51,6 +52,7 @@
     "card-info": "git+https://github.com/iniel/card-info.git",
     "css-loader": "^0.28.7",
     "emotion": "^7.3.2",
+    "emotion-server": "^8.0.4",
     "eslint": "^4.8.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
