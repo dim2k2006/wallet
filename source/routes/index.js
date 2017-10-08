@@ -1,7 +1,5 @@
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import App from '../../public/js/server';
-// import App from '../../source/client/components/App';
+import {renderToStaticMarkup} from 'react-dom/server';
+import getView from '../../libs/getView';
 
 // Cards controllers
 import getCardsController from '../controllers/cards/get';
@@ -14,17 +12,22 @@ import createTransactionController from '../controllers/transactions/create';
 
 const router = require('koa-router')();
 
+const DATA = {
+	user: {
+		login: 'samuel_johnson',
+		name: 'Samuel Johnson'
+	}
+};
+
 // Save id param to ctx.params.id
 router.param('id', (id, ctx, next) => next());
 
 // Routes
 router.get('/', async (ctx) => {
-	const markup = ReactDOMServer.renderToString(<App />);
+	const indexView = getView('index');
+	const indexViewHtml = renderToStaticMarkup(indexView(DATA));
 
-	await ctx.render('../client/index', {
-		markup: markup
-	});
-	// ctx.body = await ReactDOMServer.renderToString(<App />);
+	ctx.body = indexViewHtml;
 });
 
 router.get('/cards', getCardsController);

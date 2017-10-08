@@ -1,7 +1,6 @@
+const fs = require('fs');
 const path = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const devServer = require('./webpack/devserver');
 const css = require('./webpack/css');
 const extractCss = require('./webpack/css.extract');
@@ -10,8 +9,18 @@ const uglifyJS = require('./webpack/js.uglify');
 const images = require('./webpack/images');
 const babel = require('./webpack/js.babel');
 
+function getExternals() {
+	return fs.readdirSync('node_modules')
+		.concat(['react-dom/server'])
+		.filter((mod) => mod !== '.bin')
+		.reduce((externals, mod) => {
+			externals[mod] = `commonjs ${mod}`;
+			return externals;
+		}, {});
+}
+
 const PATHS = {
-	source: path.join(__dirname, 'source', 'client'),
+	source: path.join(__dirname, 'source', 'views'),
 	build: path.join(__dirname, 'public'),
 };
 
@@ -20,15 +29,9 @@ const common = merge([
 		entry: `${PATHS.source}/index.js`,
 		output: {
 			path: PATHS.build,
-			filename: 'js/bundle.js'
+			filename: 'js/index.js'
 		},
 		devtool: 'source-map',
-		plugins: [
-			new HtmlWebpackPlugin({
-				inject: false,
-				template: './source/client/index.ejs'
-			})
-		]
 	},
 	images(),
 	babel()
@@ -36,12 +39,14 @@ const common = merge([
 
 const server = merge([
 	{
-		entry: `${PATHS.source}/components/App/index.js`,
+		entry: `${PATHS.source}/index.server.js`,
+		target: 'node',
+		externals: getExternals(),
 		output: {
 			library: 'umd',
 			libraryTarget: 'umd',
 			path: PATHS.build,
-			filename: 'js/server.js'
+			filename: 'js/index.server.js'
 		}
 	},
 	babel()
@@ -67,7 +72,7 @@ module.exports = function (env) {
 	if (env === 'server') {
 		return merge([
 			server,
-			uglifyJS(),
+			// uglifyJS(),
 			ignoreCss()
 		]);
 	}

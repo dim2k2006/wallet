@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 import {injectGlobal} from 'emotion';
 import CardInfo from 'card-info';
@@ -112,6 +113,7 @@ class App extends Component {
 	 * @returns {JSX}
 	 */
 	render() {
+		const {data} = this.props;
 		const {cardsList, activeCardIndex, cardHistory} = this.state;
 		const activeCard = cardsList[activeCardIndex];
 
@@ -125,7 +127,7 @@ class App extends Component {
 					cardsList={cardsList}
 					onCardChange={(activeCardIndex) => this.onCardChange(activeCardIndex)} />
 				<CardPane>
-					<Header activeCard={activeCard} />
+					<Header activeCard={activeCard} user={data.user} />
 					<Workspace>
 						<History cardHistory={filteredHistory} />
 						<Prepaid
@@ -144,5 +146,15 @@ class App extends Component {
 		);
 	}
 }
+
+App.propTypes = {
+	data: PropTypes.shape({
+		user: PropTypes.object
+	})
+};
+
+App.defaultProps = {
+	data: {}
+};
 
 export default App;
