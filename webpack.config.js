@@ -1,3 +1,4 @@
+const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
 const devServer = require('./webpack/devserver');
@@ -7,6 +8,16 @@ const ignoreCss = require('./webpack/css.ignore');
 const uglifyJS = require('./webpack/js.uglify');
 const images = require('./webpack/images');
 const babel = require('./webpack/js.babel');
+
+function getExternals() {
+	return fs.readdirSync('node_modules')
+		.concat(['react-dom/server'])
+		.filter((mod) => mod !== '.bin')
+		.reduce((externals, mod) => {
+			externals[mod] = `commonjs ${mod}`;
+			return externals;
+		}, {});
+}
 
 const PATHS = {
 	source: path.join(__dirname, 'source', 'views'),
@@ -30,6 +41,7 @@ const server = merge([
 	{
 		entry: `${PATHS.source}/index.server.js`,
 		target: 'node',
+		externals: getExternals(),
 		output: {
 			library: 'umd',
 			libraryTarget: 'umd',
@@ -60,7 +72,7 @@ module.exports = function (env) {
 	if (env === 'server') {
 		return merge([
 			server,
-			uglifyJS(),
+			// uglifyJS(),
 			ignoreCss()
 		]);
 	}

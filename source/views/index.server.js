@@ -2,7 +2,7 @@ import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {extractCritical} from 'emotion-server';
 import serialize from 'serialize-javascript';
-import {App} from '../client/components/App';
+import App from '../client/components/App';
 
 export default function (appData) {
 	const app = renderToString(<App data={appData} />);
