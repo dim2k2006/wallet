@@ -1,7 +1,7 @@
 import React from 'react';
 import {hydrate as reactHydrate} from 'react-dom';
 import {hydrate as emotionHydrate} from 'emotion';
-import {App} from '../client/components/App';
+import App from '../client/components/App';
 
 const {ids, appData} = window.__data;
 
