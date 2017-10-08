@@ -14,15 +14,15 @@ export default function (appData) {
 			<head>
 				<meta charSet='utf-8' />
 				<title>Node School App</title>
-				<link rel='shortcut icon' href='/public/favicon.ico' />
-				<link rel='stylesheet' href='/public/css/main.css' />
+				<link rel='shortcut icon' href='/favicon.ico' />
+				<link rel='stylesheet' href='/css/main.css' />
 				<style type='text/css' dangerouslySetInnerHTML={{__html: css}} />
 			</head>
 			<body>
 				<div id='root' dangerouslySetInnerHTML={{__html: html}} />
 
 				<script dangerouslySetInnerHTML={{__html: viewData}} />
-				<script src='index.js' />
+				<script src='/js/index.js' />
 			</body>
 		</html>
 	);
