@@ -1,7 +1,7 @@
 const path = require('path');
 const log4js = require('log4js');
 
-const filename = path.resolve(__dirname, '..', 'logs', 'app.log');
+const filename = path.resolve(__dirname, '..', '..', 'logs', 'app.log');
 const config = {
 	appenders: {
 		out: {type: 'stdout'},
