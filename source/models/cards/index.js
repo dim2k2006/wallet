@@ -55,6 +55,39 @@ class Cards extends FileModel {
 		this._dataSource.splice(cardIndex, 1);
 		await this._saveUpdates();
 	}
+
+	/**
+	 * Reduce card balance
+	 * @param {Object} cardData
+	 * @returns {Promise.<void>}
+	 */
+	async reduce(cardData) {
+		const data = validate(cardData, [
+			presence('cardId'),
+			presence('amount'),
+		]);
+
+		if (!data.valid) {
+			throw new ApplicationError('Card data is invalid', 400);
+		}
+
+		const id = cardData.cardId;
+		const amount = cardData.amount;
+		const card = this._dataSource.find((item) => item.id === id);
+
+		if (!card) {
+			throw new ApplicationError(`Card with ID=${id} not found`, 404);
+		}
+
+		const balance = Number(card.balance);
+		const diff = balance - amount;
+
+		const newBalance = diff > 0 ? diff : 0;
+
+		card.balance = JSON.stringify(newBalance);
+
+		await this._saveUpdates();
+	}
 }
 
 export default Cards;
