@@ -13,7 +13,7 @@ const reduceCardController = async (ctx) => {
 		sum: amount
 	};
 
-	await ctx.CardsModel.reduce(cardId, amount);
+	await ctx.CardsModel.reduce({cardId, amount});
 	await ctx.TransactionsModel.create(transaction);
 	ctx.status = 200;
 };

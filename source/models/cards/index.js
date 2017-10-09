@@ -58,11 +58,21 @@ class Cards extends FileModel {
 
 	/**
 	 * Reduce card balance
-	 * @param {Number} id
-	 * @param {Number} amount
+	 * @param {Object} cardData
 	 * @returns {Promise.<void>}
 	 */
-	async reduce(id, amount) {
+	async reduce(cardData) {
+		const data = validate(cardData, [
+			presence('cardId'),
+			presence('amount'),
+		]);
+
+		if (!data.valid) {
+			throw new ApplicationError('Card data is invalid', 400);
+		}
+
+		const id = cardData.cardId;
+		const amount = cardData.amount;
 		const card = this._dataSource.find((item) => item.id === id);
 
 		if (!card) {
