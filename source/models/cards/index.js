@@ -15,26 +15,25 @@ class Cards extends FileModel {
 	}
 
 	/**
-	 * Create new card
+	 * Create new card. If new card already exist - update card balance
 	 * @param {Object} card
 	 * @returns {Object}
 	 */
 	async create(card) {
 		const id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
-		const newCard = {...card, id};
+		let newCard = {};
 
-		const data = validate(newCard, [
-			presence('cardNumber'),
-			presence('balance'),
-			luhn('cardNumber'),
-		]);
+		const existingCard = this._dataSource.find((item) => item.cardNumber === card.cardNumber);
 
-		if (data.valid) {
+		if (!existingCard) {
+			newCard = {...card, id};
 			this._dataSource.push(newCard);
-			await this._saveUpdates();
 		} else {
-			throw new ApplicationError('Card data is invalid', 400);
+			existingCard.balance = card.balance;
+			newCard = existingCard;
 		}
+
+		await this._saveUpdates();
 
 		return newCard;
 	}
