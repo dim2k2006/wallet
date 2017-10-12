@@ -10,6 +10,7 @@ const createTransactionController = async (ctx) => {
 	const transaction = ctx.request.body;
 
 	transaction.cardId = Number(ctx.params.id);
+	transaction.time = transaction.time ? transaction.time : (new Date()).toISOString();
 
 	const data = validate(transaction, [
 		presence('cardId'),
@@ -18,6 +19,8 @@ const createTransactionController = async (ctx) => {
 		isEmpty('type'),
 		presence('data'),
 		isEmpty('data'),
+		presence('time'),
+		isEmpty('time'),
 		presence('sum'),
 		isEmpty('sum'),
 	]);
@@ -25,8 +28,6 @@ const createTransactionController = async (ctx) => {
 	if (!data.valid) {
 		throw new ApplicationError('Transaction data is invalid', 400);
 	}
-
-	transaction.time = transaction.time ? transaction.time : (new Date()).toISOString();
 
 	const newTransaction = await ctx.TransactionsModel.create(transaction);
 
