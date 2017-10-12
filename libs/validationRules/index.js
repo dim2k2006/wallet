@@ -1,10 +1,23 @@
 /**
- * Valid card number with Luhn algorithm (4556253936368724 - valid card number for test)
+ * Check if property is not empty
  * @param {String} propertyName
  * @returns {Function}
  */
-const luhnCardValidation = (propertyName) => {
-	return function(subject) {
+const isEmpty = (propertyName) => {
+	return (subject) => {
+		const value = subject[propertyName];
+
+		return value.length > 0;
+	};
+};
+
+/**
+ * Validate card number with Luhn algorithm (4556253936368724 - valid card number for test)
+ * @param {String} propertyName
+ * @returns {Function}
+ */
+const isLuhn = (propertyName) => {
+	return (subject) => {
 		let value = subject[propertyName];
 		const result = {
 			result: true,
@@ -45,4 +58,4 @@ const luhnCardValidation = (propertyName) => {
 	};
 };
 
-export default luhnCardValidation;
+export {isEmpty, isLuhn};

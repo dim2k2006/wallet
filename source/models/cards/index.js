@@ -1,5 +1,4 @@
 import {validate, presence} from 'property-validator';
-import luhn from '../../../libs/luhnCardValidation';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
 

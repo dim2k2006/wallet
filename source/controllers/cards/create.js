@@ -1,5 +1,5 @@
 import {validate, presence, isNumeric} from 'property-validator';
-import luhn from '../../../libs/luhnCardValidation';
+import {isEmpty, isLuhn} from '../../../libs/validationRules';
 import ApplicationError from '../../../libs/applicationError';
 
 /**
@@ -10,8 +10,10 @@ const createCardController = async (ctx) => {
 	const card = ctx.request.body;
 	const data = validate(card, [
 		presence('cardNumber'),
-		luhn('cardNumber'),
+		isEmpty('cardNumber'),
+		isLuhn('cardNumber'),
 		presence('balance'),
+		isEmpty('balance'),
 		isNumeric('balance')
 	]);
 
