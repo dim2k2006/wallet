@@ -22,7 +22,7 @@ const createTransactionController = async (ctx) => {
 		presence('time'),
 		isEmpty('time'),
 		presence('sum'),
-		isEmpty('sum'),
+		isEmpty('sum')
 	]);
 
 	if (!data.valid) {
