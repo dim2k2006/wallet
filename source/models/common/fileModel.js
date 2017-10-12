@@ -51,6 +51,15 @@ class FileModel extends Model {
 	}
 
 	/**
+	 * Generate new id
+	 * @return {Number}
+	 * @private
+	 */
+	_generateId() {
+		return this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+	}
+
+	/**
 	 * Save updates
 	 * @private
 	 */

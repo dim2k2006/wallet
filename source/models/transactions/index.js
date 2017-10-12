@@ -19,23 +19,11 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(transactionData) {
-		const id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+		const id = this._generateId();
 		const newTransaction = {...transactionData, id};
 
-		const data = validate(newTransaction, [
-			presence('cardId'),
-			presence('type'),
-			presence('data'),
-			presence('time'),
-			presence('sum'),
-		]);
-
-		if (data.valid) {
-			this._dataSource.push(newTransaction);
-			await this._saveUpdates();
-		} else {
-			throw new ApplicationError('Transaction data is invalid', 400);
-		}
+		this._dataSource.push(newTransaction);
+		await this._saveUpdates();
 
 		return newTransaction;
 	}
