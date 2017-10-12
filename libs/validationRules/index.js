@@ -8,7 +8,7 @@ const isEmpty = (propertyName) => {
 		const value = subject[propertyName];
 
 		return {
-			result: value.length > 0,
+			result: value ? true : false,
 			message: 'Empty value',
 			field: propertyName
 		};
