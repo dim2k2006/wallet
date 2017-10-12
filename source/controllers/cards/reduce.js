@@ -30,7 +30,7 @@ const reduceCardController = async (ctx) => {
 		cardId,
 		type: 'paymentMobile',
 		data: '+7(921)9999999',
-		sum: amount
+		sum: amount * (-1)
 	};
 
 	await ctx.CardsModel.reduce(cardData);

@@ -60,15 +60,6 @@ class Cards extends FileModel {
 	 * @returns {Promise.<void>}
 	 */
 	async reduce(cardData) {
-		const data = validate(cardData, [
-			presence('cardId'),
-			presence('amount'),
-		]);
-
-		if (!data.valid) {
-			throw new ApplicationError('Card data is invalid', 400);
-		}
-
 		const id = cardData.cardId;
 		const amount = cardData.amount;
 		const card = this._dataSource.find((item) => item.id === id);
@@ -77,12 +68,12 @@ class Cards extends FileModel {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
 		}
 
-		const balance = Number(card.balance);
+		const balance = card.balance;
 		const diff = balance - amount;
 
 		const newBalance = diff > 0 ? diff : 0;
 
-		card.balance = JSON.stringify(newBalance);
+		card.balance = newBalance;
 
 		await this._saveUpdates();
 	}
