@@ -19,7 +19,7 @@ class Cards extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(card) {
-		const id = this._dataSource.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+		const id = this._generateId();
 		let newCard = {};
 
 		const existingCard = this._dataSource.find((item) => item.cardNumber === card.cardNumber);
