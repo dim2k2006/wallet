@@ -2,6 +2,8 @@ import {validate, presence, isNumeric} from 'property-validator';
 import {isEmpty} from '../../../libs/validationRules';
 import ApplicationError from '../../../libs/applicationError';
 
+const commission = 3;
+
 /**
  * Reduce card balance
  * @param {Object} ctx
@@ -35,7 +37,7 @@ const cardToMobileController = async (ctx) => {
 		type: 'paymentMobile',
 		data,
 		time: (new Date()).toISOString(),
-		sum: amount * (-1)
+		sum: (amount + commission) * (-1)
 	};
 
 	await ctx.CardsModel.reduce(cardData);
