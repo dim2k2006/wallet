@@ -13,6 +13,15 @@ class Cards extends FileModel {
 	}
 
 	/**
+	 * Get card
+	 * @param {Number} id
+	 * @returns {Promise.<T|*|{}>}
+	 */
+	async get(id) {
+		return this._dataSource.find((item) => item.id === Number(id));
+	}
+
+	/**
 	 * Create new card. If new card already exist - update card balance
 	 * @param {Object} card
 	 * @returns {Object}
@@ -61,7 +70,7 @@ class Cards extends FileModel {
 	async reduce(cardData) {
 		const id = cardData.cardId;
 		const amount = cardData.amount;
-		const card = this._dataSource.find((item) => item.id === id);
+		const card = await this.get(id);
 
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
@@ -73,6 +82,21 @@ class Cards extends FileModel {
 		const newBalance = diff > 0 ? diff : 0;
 
 		card.balance = newBalance;
+
+		await this._saveUpdates();
+	}
+
+	/**
+	 * Increase card balance
+	 * @param {Object} cardData
+	 * @returns {Promise.<void>}
+	 */
+	async increase(cardData) {
+		const id = cardData.cardId;
+		const amount = cardData.amount;
+		const card = await this.get(id);
+
+		card.balance = Number(card.balance) + Number(amount);
 
 		await this._saveUpdates();
 	}

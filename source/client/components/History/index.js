@@ -92,30 +92,32 @@ const History = ({cardHistory}) => {
 	return (
 		<HistoryLayout>
 			<HistoryTitle>Сегодня</HistoryTitle>
-			{cardHistory.map((item, index) => {
-				const historyItemDate = moment(item.time, moment.ISO_8601);
-				const today = moment().format('L');
-				const isTodayHistoryItem = historyItemDate.format('L') === today;
+			{
+				cardHistory.map((item, index) => {
+					const historyItemDate = moment(item.time, moment.ISO_8601);
+					const today = moment().format('L');
+					const isTodayHistoryItem = historyItemDate.format('L') === today;
 
-				if (!isTodayHistoryItem) {
-					return '';
-				}
+					if (!isTodayHistoryItem) {
+						return '';
+					}
 
-				return (
-					<HistoryItem key={index}>
-						<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl} />
-						<HistoryItemTitle>
-							{getHistoryItemTitle(item)}
-						</HistoryItemTitle>
-						<HistoryItemTime>
-							{historyItemDate.format('HH:mm')}
-						</HistoryItemTime>
-						<HistoryItemSum>
-							{`${item.sum} ₽`}
-						</HistoryItemSum>
-					</HistoryItem>
-				);
-			})}
+					return (
+						<HistoryItem key={index}>
+							<HistoryItemIcon bankSmLogoUrl={item.card.theme.bankSmLogoUrl} />
+							<HistoryItemTitle>
+								{getHistoryItemTitle(item)}
+							</HistoryItemTitle>
+							<HistoryItemTime>
+								{historyItemDate.format('HH:mm')}
+							</HistoryItemTime>
+							<HistoryItemSum>
+								{`${item.sum} ₽`}
+							</HistoryItemSum>
+						</HistoryItem>
+					);
+				})
+			}
 		</HistoryLayout>
 	);
 };

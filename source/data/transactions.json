@@ -170,39 +170,49 @@
     {
         "cardId": 1,
         "type": "paymentMobile",
-        "data": "+7(921)9999999",
-        "time": "2017-10-09T16:47:20.842Z",
-        "sum": 500,
+        "data": "+79218908064",
+        "time": "2017-10-15T11:01:18.558Z",
+        "sum": -200,
         "id": 22
     },
     {
         "cardId": 1,
-        "type": "paymentMobile",
-        "data": "+7(921)9999999",
-        "time": "2017-10-09T18:17:04.470Z",
-        "sum": 500,
+        "type": "withdrawCard",
+        "data": "676230000000000",
+        "time": "2017-10-15T12:44:53.384Z",
+        "sum": 100,
         "id": 23
     },
     {
         "cardId": 1,
-        "type": "paymentMobile",
-        "data": "+7(921)9999999",
-        "time": "2017-10-09T18:17:10.519Z",
-        "sum": 500,
+        "type": "withdrawCard",
+        "data": "437784000000000",
+        "time": "2017-10-15T12:47:09.541Z",
+        "sum": 50,
         "id": 24
     },
     {
         "cardId": 1,
-        "type": "paymentMobile",
-        "data": "+7(921)9999999",
-        "sum": -200,
+        "type": "withdrawCard",
+        "data": "676230000000000",
+        "time": "2017-10-15T13:08:03.437Z",
+        "sum": 3,
         "id": 25
     },
     {
         "cardId": 1,
-        "type": "paymentMobile",
-        "data": "+7(921)9999999",
-        "sum": -200,
+        "type": "withdrawCard",
+        "data": "676230000000000",
+        "time": "2017-10-15T13:08:45.098Z",
+        "sum": 7,
         "id": 26
+    },
+    {
+        "cardId": 1,
+        "type": "withdrawCard",
+        "data": "676230000000000",
+        "time": "2017-10-15T13:18:37.509Z",
+        "sum": 7,
+        "id": 27
     }
 ]
