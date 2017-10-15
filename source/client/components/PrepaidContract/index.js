@@ -179,7 +179,6 @@ class PrepaidContract extends Component {
 										<PrepaidItemTitle
 											textColor={card.theme.textColor}
 											selected={activeCardIndex === index}>
-											C банковской карты
 											<PrepaidItemDescription
 												textColor={card.theme.textColor}
 												selected={activeCardIndex === index}>

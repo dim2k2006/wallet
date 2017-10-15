@@ -56215,7 +56215,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-PrepaidLayout-e4zrva0', [], [], function createEmotionStyledRules() {
+var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-PrepaidLayout-d0z4380', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '350px',
 		'display': '-webkit-box; display: -ms-flexbox; display: flex',
@@ -56230,20 +56230,20 @@ var PrepaidLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-Pre
 	};
 });
 
-var PrepaidTitle = /*#__PURE__*/(0, _react4.default)(_Title2.default, 'css-PrepaidTitle-e4zrva1', [], [], function createEmotionStyledRules() {
+var PrepaidTitle = /*#__PURE__*/(0, _react4.default)(_Title2.default, 'css-PrepaidTitle-d0z4381', [], [], function createEmotionStyledRules() {
 	return {
 		'color': '#fff'
 	};
 });
 
-var PrepaidItems = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItems-e4zrva2', [], [], function createEmotionStyledRules() {
+var PrepaidItems = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItems-d0z4382', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '285px',
 		'marginBottom': '40px'
 	};
 });
 
-var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-e4zrva3', [], [function (_ref) {
+var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-d0z4383', [], [function (_ref) {
 	var selected = _ref.selected,
 	    bgColor = _ref.bgColor;
 	return selected ? bgColor : 'rgba(0, 0, 0, 0.05)';
@@ -56260,7 +56260,7 @@ var PrepaidItem = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem-e4zr
 	};
 });
 
-var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemIcon-e4zrva4', [], [function (_ref2) {
+var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemIcon-d0z4384', [], [function (_ref2) {
 	var bankSmLogoUrl = _ref2.bankSmLogoUrl;
 	return bankSmLogoUrl;
 }, function (_ref3) {
@@ -56280,7 +56280,7 @@ var PrepaidItemIcon = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemI
 	};
 });
 
-var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemTitle-e4zrva5', [], [function (_ref4) {
+var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemTitle-d0z4385', [], [function (_ref4) {
 	var selected = _ref4.selected,
 	    textColor = _ref4.textColor;
 	return selected ? textColor : 'rgba(255, 255, 255, 0.6)';
@@ -56291,7 +56291,7 @@ var PrepaidItemTitle = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItem
 	};
 });
 
-var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemDescription-e4zrva6', [], [function (_ref5) {
+var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-PrepaidItemDescription-d0z4386', [], [function (_ref5) {
 	var selected = _ref5.selected,
 	    textColor = _ref5.textColor;
 	return selected ? textColor : 'rgba(255, 255, 255, 0.4)';
@@ -56301,14 +56301,14 @@ var PrepaidItemDescription = /*#__PURE__*/(0, _react4.default)('div', 'css-Prepa
 	};
 });
 
-var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-e4zrva7', [], [], function createEmotionStyledRules() {
+var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-d0z4387', [], [], function createEmotionStyledRules() {
 	return {
 		'margin': '20px 0',
 		'position': 'relative'
 	};
 });
 
-var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-e4zrva8', [], [], function createEmotionStyledRules() {
+var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-d0z4388', [], [], function createEmotionStyledRules() {
 	return {
 		'maxWidth': '200px',
 		'paddingRight': '20px',
@@ -56317,7 +56317,7 @@ var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-
 	};
 });
 
-var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-e4zrva9', [], [], function createEmotionStyledRules() {
+var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-d0z4389', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '12px',
 		'position': 'absolute',
@@ -56478,7 +56478,6 @@ var PrepaidContract = function (_Component) {
 									{
 										textColor: card.theme.textColor,
 										selected: activeCardIndex === index },
-									'C \u0431\u0430\u043D\u043A\u043E\u0432\u0441\u043A\u043E\u0439 \u043A\u0430\u0440\u0442\u044B',
 									_react2.default.createElement(
 										PrepaidItemDescription,
 										{
