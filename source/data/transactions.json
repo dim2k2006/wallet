@@ -171,14 +171,16 @@
         "cardId": 1,
         "type": "paymentMobile",
         "data": 79218908064,
+        "time": "2017-10-15T10:53:50.444Z",
         "sum": -500,
         "id": 22
     },
     {
-        "cardId": 6,
+        "cardId": 1,
         "type": "paymentMobile",
         "data": 79218908064,
-        "sum": -25,
+        "time": "2017-10-15T10:58:18.091Z",
+        "sum": -100,
         "id": 23
     }
 ]

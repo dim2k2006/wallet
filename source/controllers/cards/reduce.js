@@ -34,6 +34,7 @@ const reduceCardController = async (ctx) => {
 		cardId,
 		type: 'paymentMobile',
 		data,
+		time: (new Date()).toISOString(),
 		sum: amount * (-1)
 	};
 
