@@ -70,7 +70,7 @@ class Cards extends FileModel {
 	async reduce(cardData) {
 		const id = cardData.cardId;
 		const amount = cardData.amount;
-		const card = this.get(id);
+		const card = await this.get(id);
 
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
