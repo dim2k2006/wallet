@@ -9,27 +9,31 @@ import ApplicationError from '../../../libs/applicationError';
 const reduceCardController = async (ctx) => {
 	const cardId = Number(ctx.params.id);
 	const amount = Number(ctx.request.body.amount);
+	const data = Number(ctx.request.body.data);
 	const cardData = {
 		cardId,
-		amount
+		amount,
+		data
 	};
 
-	const data = validate(cardData, [
+	const validationData = validate(cardData, [
 		presence('cardId'),
 		isEmpty('cardId'),
 		presence('amount'),
 		isEmpty('amount'),
-		isNumeric('amount')
+		isNumeric('amount'),
+		presence('data'),
+		isEmpty('data')
 	]);
 
-	if (!data.valid) {
+	if (!validationData.valid) {
 		throw new ApplicationError('Card data is invalid', 400);
 	}
 
 	const transaction = {
 		cardId,
 		type: 'paymentMobile',
-		data: '+7(921)9999999',
+		data,
 		sum: amount * (-1)
 	};
 
