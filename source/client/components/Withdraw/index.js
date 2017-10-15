@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'emotion/react';
+import axios from 'axios';
 
-import Card from '../Card';
-import Title from '../Title';
-import Button from '../Button';
-import Island from '../Island';
-import Input from '../Input';
+import {Card, Title, Button, Island, Input} from './';
 
 const WithdrawTitle = styled(Title)`
 	text-align: center;
@@ -80,14 +77,27 @@ class Withdraw extends Component {
 			event.preventDefault();
 		}
 
-		const {sum} = this.state;
+		const {selectedCard, sum} = this.state;
+		const {activeCard} = this.props;
 
 		const isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
 		if (!isNumber || sum <= 0) {
 			return;
 		}
 
-		this.setState({sum: 0});
+		const options = {
+			method: 'post',
+			url: `/cards/${activeCard.id}/transfer`,
+			data: {
+				target: selectedCard.id,
+				sum
+			}
+		};
+
+		axios(options).then(() => {
+			this.props.onTransaction();
+			this.setState({sum: 0});
+		});
 	}
 
 	/**
@@ -117,11 +127,11 @@ class Withdraw extends Component {
 }
 
 Withdraw.propTypes = {
-	// activeCard: PropTypes.shape({
-	// 	id: PropTypes.number,
-	// 	theme: PropTypes.object
-	// }).isRequired,
-	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
+	activeCard: PropTypes.shape({
+		id: PropTypes.number
+	}).isRequired,
+	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+	onTransaction: PropTypes.func.isRequired
 };
 
 export default Withdraw;
