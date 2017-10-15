@@ -5,7 +5,7 @@ import getView from '../../libs/getView';
 import getCardsController from '../controllers/cards/get';
 import createCardController from '../controllers/cards/create';
 import removeCardController from '../controllers/cards/remove';
-import reduceCardController from '../controllers/cards/reduce';
+import cardToMobileController from '../controllers/cards/card-to-mobile';
 
 // Transactions controllers
 import getTransactionsController from '../controllers/transactions/get';
@@ -34,7 +34,7 @@ router.get('/', async (ctx) => {
 router.get('/cards', getCardsController);
 router.post('/cards', createCardController);
 router.delete('/cards/:id', removeCardController);
-router.post('/cards/:id/pay', reduceCardController);
+router.post('/cards/:id/pay', cardToMobileController);
 
 router.get('/cards/:id/transactions/', getTransactionsController);
 router.post('/cards/:id/transactions/', createTransactionController);

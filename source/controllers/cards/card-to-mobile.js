@@ -6,7 +6,7 @@ import ApplicationError from '../../../libs/applicationError';
  * Reduce card balance
  * @param {Object} ctx
  */
-const reduceCardController = async (ctx) => {
+const cardToMobileController = async (ctx) => {
 	const cardId = Number(ctx.params.id);
 	const amount = Number(ctx.request.body.amount);
 	const data = ctx.request.body.data;
@@ -43,4 +43,4 @@ const reduceCardController = async (ctx) => {
 	ctx.status = 200;
 };
 
-export default reduceCardController;
+export default cardToMobileController;
