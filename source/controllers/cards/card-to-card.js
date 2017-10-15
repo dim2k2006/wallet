@@ -3,18 +3,24 @@
  * @param {Object} ctx
  */
 const cardToCardController = async (ctx) => {
-	const cardId = ctx.params.id;
+	const cardId = Number(ctx.params.id);
+	const target = Number(ctx.request.body.target);
+	const sum = Number(ctx.request.body.sum);
 
-	const operation = ctx.request.body;
-	const {target, sum} = operation;
+	await ctx.CardsModel.reduce({
+		cardId,
+		amount: sum
+	});
 
-	await ctx.cardsModel.withdraw(cardId, sum);
-	await ctx.cardsModel.refill(target, sum);
+	await ctx.CardsModel.increase({
+		cardId: target,
+		amount: sum
+	});
 
-	const sourceCard = await ctx.cardsModel.get(cardId);
-	const targetCard = await ctx.cardsModel.get(target);
+	const sourceCard = await ctx.CardsModel.get(cardId);
+	const targetCard = await ctx.CardsModel.get(target);
 
-	const transaction = await ctx.transactionsModel.create({
+	const transaction = await ctx.TransactionsModel.create({
 		cardId: sourceCard.id,
 		type: 'withdrawCard',
 		data: {

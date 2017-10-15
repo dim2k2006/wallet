@@ -7,7 +7,7 @@
     {
         "id": 2,
         "cardNumber": "676230000000000",
-        "balance": 0
+        "balance": 100
     },
     {
         "id": 3,
@@ -22,7 +22,7 @@
     {
         "id": 5,
         "cardNumber": "437784000000000",
-        "balance": 4545
+        "balance": 4595
     },
     {
         "id": 6,

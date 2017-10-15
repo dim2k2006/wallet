@@ -70,7 +70,7 @@ class Cards extends FileModel {
 	async reduce(cardData) {
 		const id = cardData.cardId;
 		const amount = cardData.amount;
-		const card = this._dataSource.find((item) => item.id === id);
+		const card = this.get();
 
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
@@ -82,6 +82,21 @@ class Cards extends FileModel {
 		const newBalance = diff > 0 ? diff : 0;
 
 		card.balance = newBalance;
+
+		await this._saveUpdates();
+	}
+
+	/**
+	 * Increase card balance
+	 * @param {Object} cardData
+	 * @returns {Promise.<void>}
+	 */
+	async increase(cardData) {
+		const id = cardData.cardId;
+		const amount = cardData.amount;
+		const card = await this.get(id);
+
+		card.balance = Number(card.balance) + Number(amount);
 
 		await this._saveUpdates();
 	}

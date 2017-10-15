@@ -174,5 +174,25 @@
         "time": "2017-10-15T11:01:18.558Z",
         "sum": -200,
         "id": 22
+    },
+    {
+        "cardId": 1,
+        "type": "withdrawCard",
+        "data": {
+            "cardNumber": "676230000000000"
+        },
+        "time": "2017-10-15T12:44:53.384Z",
+        "sum": 100,
+        "id": 23
+    },
+    {
+        "cardId": 1,
+        "type": "withdrawCard",
+        "data": {
+            "cardNumber": "437784000000000"
+        },
+        "time": "2017-10-15T12:47:09.541Z",
+        "sum": 50,
+        "id": 24
     }
 ]
