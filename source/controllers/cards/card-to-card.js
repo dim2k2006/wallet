@@ -23,9 +23,7 @@ const cardToCardController = async (ctx) => {
 	const transaction = await ctx.TransactionsModel.create({
 		cardId: sourceCard.id,
 		type: 'withdrawCard',
-		data: {
-			cardNumber: targetCard.cardNumber
-		},
+		data: targetCard.cardNumber,
 		time: new Date().toISOString(),
 		sum
 	});
