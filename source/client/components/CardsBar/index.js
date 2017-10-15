@@ -37,8 +37,9 @@ const Footer = styled.footer`
 `;
 
 const CardsBar = ({activeCardIndex, cardsList, onCardChange}) => {
-	const onCardClick = (activeCardIndex) => {
-		onCardChange && onCardChange(activeCardIndex);
+	const onCardClick = (index) => {
+		// eslint-disable-next-line no-unused-expressions
+		onCardChange && onCardChange(index);
 	};
 
 	return (
