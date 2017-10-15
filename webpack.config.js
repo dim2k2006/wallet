@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const merge = require('webpack-merge');
-const devServer = require('./webpack/devserver');
-const css = require('./webpack/css');
 const extractCss = require('./webpack/css.extract');
 const ignoreCss = require('./webpack/css.ignore');
 const uglifyJS = require('./webpack/js.uglify');
-const images = require('./webpack/images');
 const babel = require('./webpack/js.babel');
+const envProduction = require('./webpack/env.production');
+const envDevelopment = require('./webpack/env.development');
 
 function getExternals() {
 	return fs.readdirSync('node_modules')
@@ -32,8 +31,8 @@ const common = merge([
 			filename: 'js/index.js'
 		},
 		devtool: 'source-map',
+		watch: true
 	},
-	images(),
 	babel()
 ]);
 
@@ -47,7 +46,8 @@ const server = merge([
 			libraryTarget: 'umd',
 			path: PATHS.build,
 			filename: 'js/index.server.js'
-		}
+		},
+		watch: true
 	},
 	babel()
 ]);
@@ -56,6 +56,7 @@ module.exports = function (env) {
 	if (env === 'production') {
 		return merge([
 			common,
+			envProduction(),
 			extractCss(),
 			uglifyJS()
 		]);
@@ -64,15 +65,16 @@ module.exports = function (env) {
 	if (env === 'development') {
 		return merge([
 			common,
-			devServer(),
-			css()
+			envDevelopment(),
+			extractCss()
 		]);
 	}
 
 	if (env === 'server') {
 		return merge([
 			server,
-			// uglifyJS(),
+			envProduction(),
+			uglifyJS(),
 			ignoreCss()
 		]);
 	}
