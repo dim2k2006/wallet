@@ -58488,6 +58488,10 @@ var _react3 = __webpack_require__(3);
 
 var _react4 = _interopRequireDefault(_react3);
 
+var _axios = __webpack_require__(332);
+
+var _axios2 = _interopRequireDefault(_axios);
+
 var _Card = __webpack_require__(66);
 
 var _Card2 = _interopRequireDefault(_Card);
@@ -58518,13 +58522,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var WithdrawTitle = /*#__PURE__*/(0, _react4.default)(_Title2.default, 'css-WithdrawTitle-1kq8in70', [], [], function createEmotionStyledRules() {
+var WithdrawTitle = /*#__PURE__*/(0, _react4.default)(_Title2.default, 'css-WithdrawTitle-1k56sii0', [], [], function createEmotionStyledRules() {
 	return {
 		'textAlign': 'center'
 	};
 });
 
-var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-WithdrawLayout-1kq8in71', [], [], function createEmotionStyledRules() {
+var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-WithdrawLayout-1k56sii1', [], [], function createEmotionStyledRules() {
 	return {
 		'width': '440px',
 		'display': '-webkit-box; display: -ms-flexbox; display: flex',
@@ -58538,14 +58542,14 @@ var WithdrawLayout = /*#__PURE__*/(0, _react4.default)(_Island2.default, 'css-Wi
 	};
 });
 
-var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-1kq8in72', [], [], function createEmotionStyledRules() {
+var InputField = /*#__PURE__*/(0, _react4.default)('div', 'css-InputField-1k56sii2', [], [], function createEmotionStyledRules() {
 	return {
 		'margin': '20px 0',
 		'position': 'relative'
 	};
 });
 
-var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-1kq8in73', [], [], function createEmotionStyledRules() {
+var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-1k56sii3', [], [], function createEmotionStyledRules() {
 	return {
 		'maxWidth': '200px',
 		'paddingRight': '20px',
@@ -58554,7 +58558,7 @@ var SumInput = /*#__PURE__*/(0, _react4.default)(_Input2.default, 'css-SumInput-
 	};
 });
 
-var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-1kq8in74', [], [], function createEmotionStyledRules() {
+var Currency = /*#__PURE__*/(0, _react4.default)('span', 'css-Currency-1k56sii4', [], [], function createEmotionStyledRules() {
 	return {
 		'fontSize': '12px',
 		'position': 'absolute',
@@ -58615,11 +58619,16 @@ var Withdraw = function (_Component) {
 	}, {
 		key: 'onSubmitForm',
 		value: function onSubmitForm(event) {
+			var _this2 = this;
+
 			if (event) {
 				event.preventDefault();
 			}
 
-			var sum = this.state.sum;
+			var _state = this.state,
+			    selectedCard = _state.selectedCard,
+			    sum = _state.sum;
+			var activeCard = this.props.activeCard;
 
 
 			var isNumber = !isNaN(parseFloat(sum)) && isFinite(sum);
@@ -58627,7 +58636,18 @@ var Withdraw = function (_Component) {
 				return;
 			}
 
-			this.setState({ sum: 0 });
+			var options = {
+				method: 'post',
+				url: '/cards/' + activeCard.id + '/transfer',
+				data: {
+					target: selectedCard.id,
+					sum: sum
+				}
+			};
+
+			(0, _axios2.default)(options).then(function () {
+				_this2.setState({ sum: 0 });
+			});
 		}
 
 		/**
@@ -58638,7 +58658,7 @@ var Withdraw = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var _this2 = this;
+			var _this3 = this;
 
 			var inactiveCardsList = this.props.inactiveCardsList;
 
@@ -58646,7 +58666,7 @@ var Withdraw = function (_Component) {
 			return _react2.default.createElement(
 				'form',
 				{ onSubmit: function onSubmit(event) {
-						return _this2.onSubmitForm(event);
+						return _this3.onSubmitForm(event);
 					} },
 				_react2.default.createElement(
 					WithdrawLayout,
@@ -58664,7 +58684,7 @@ var Withdraw = function (_Component) {
 							name: 'sum',
 							value: this.state.sum,
 							onChange: function onChange(event) {
-								return _this2.onChangeInputValue(event);
+								return _this3.onChangeInputValue(event);
 							} }),
 						_react2.default.createElement(
 							Currency,
@@ -58686,10 +58706,9 @@ var Withdraw = function (_Component) {
 }(_react.Component);
 
 Withdraw.propTypes = {
-	// activeCard: PropTypes.shape({
-	// 	id: PropTypes.number,
-	// 	theme: PropTypes.object
-	// }).isRequired,
+	activeCard: _propTypes2.default.shape({
+		id: _propTypes2.default.number
+	}).isRequired,
 	inactiveCardsList: _propTypes2.default.arrayOf(_propTypes2.default.object).isRequired
 };
 

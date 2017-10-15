@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'emotion/react';
 import axios from 'axios';
 
-import {Card, Title, Button, Island, Input} from './';
+import Card from '../Card';
+import Title from '../Title';
+import Button from '../Button';
+import Island from '../Island';
+import Input from '../Input';
 
 const WithdrawTitle = styled(Title)`
 	text-align: center;
@@ -95,7 +99,6 @@ class Withdraw extends Component {
 		};
 
 		axios(options).then(() => {
-			this.props.onTransaction();
 			this.setState({sum: 0});
 		});
 	}
@@ -130,8 +133,7 @@ Withdraw.propTypes = {
 	activeCard: PropTypes.shape({
 		id: PropTypes.number
 	}).isRequired,
-	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-	onTransaction: PropTypes.func.isRequired
+	inactiveCardsList: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default Withdraw;
