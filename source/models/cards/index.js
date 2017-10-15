@@ -13,6 +13,15 @@ class Cards extends FileModel {
 	}
 
 	/**
+	 * Get card
+	 * @param {Number} id
+	 * @returns {Promise.<T|*|{}>}
+	 */
+	async get(id) {
+		return this._dataSource.find((item) => item.id === Number(id));
+	}
+
+	/**
 	 * Create new card. If new card already exist - update card balance
 	 * @param {Object} card
 	 * @returns {Object}
