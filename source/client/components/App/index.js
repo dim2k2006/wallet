@@ -15,6 +15,7 @@ import './fonts.css';
 import cardsData from '../../../data/cards.json';
 import transactionsData from '../../../data/transactions.json';
 
+// eslint-disable-next-line no-unused-expressions
 injectGlobal`
 	html,
 	body {
@@ -57,7 +58,7 @@ class App extends Component {
 
 		const cardsList = this.prepareCardsData(cardsData);
 		const cardHistory = transactionsData.map((data) => {
-			const card = cardsList.find((card) => card.id === data.cardId);
+			const card = cardsList.find((cardItem) => cardItem.id === data.cardId);
 			return card ? Object.assign({}, data, {card}) : data;
 		});
 
@@ -69,13 +70,23 @@ class App extends Component {
 	}
 
 	/**
+	 * Обработчик переключения карты
+	 *
+	 * @param {Number} activeCardIndex индекс выбранной карты
+	 */
+	onCardChange(activeCardIndex) {
+		this.setState({activeCardIndex});
+	}
+
+	/**
 	 * Подготавливает данные карт
 	 *
-	 * @param {Object} cardsData данные карт
+	 * @param {Object} cards данные карт
 	 * @returns {Object[]}
 	 */
-	prepareCardsData(cardsData) {
-		return cardsData.map((card) => {
+	// eslint-disable-next-line class-methods-use-this
+	prepareCardsData(cards) {
+		return cards.map((card) => {
 			const cardInfo = new CardInfo(card.cardNumber, {
 				banksLogosPath: '/assets/',
 				brandsLogosPath: '/assets/'
@@ -98,15 +109,6 @@ class App extends Component {
 	}
 
 	/**
-	 * Обработчик переключения карты
-	 *
-	 * @param {Number} activeCardIndex индекс выбранной карты
-	 */
-	onCardChange(activeCardIndex) {
-		this.setState({activeCardIndex});
-	}
-
-	/**
 	 * Рендер компонента
 	 *
 	 * @override
@@ -117,15 +119,20 @@ class App extends Component {
 		const {cardsList, activeCardIndex, cardHistory} = this.state;
 		const activeCard = cardsList[activeCardIndex];
 
-		const inactiveCardsList = cardsList.filter((card, index) => index === activeCardIndex ? false : card);
-		const filteredHistory = cardHistory.filter((data) => data.cardId === activeCard.id);
+		const inactiveCardsList = cardsList.filter((card, index) => {
+			const item = index === activeCardIndex ? false : card;
+
+			return item;
+		});
+
+		const filteredHistory = cardHistory.filter((cardHistoryItem) => cardHistoryItem.cardId === activeCard.id);
 
 		return (
 			<Wallet>
 				<CardsBar
 					activeCardIndex={activeCardIndex}
 					cardsList={cardsList}
-					onCardChange={(activeCardIndex) => this.onCardChange(activeCardIndex)} />
+					onCardChange={(index) => this.onCardChange(index)} />
 				<CardPane>
 					<Header activeCard={activeCard} user={data.user} />
 					<Workspace>
@@ -133,13 +140,11 @@ class App extends Component {
 						<Prepaid
 							activeCard={activeCard}
 							inactiveCardsList={inactiveCardsList}
-							onCardChange={(newActiveCardIndex) => this.onCardChange(newActiveCardIndex)}
-						/>
+							onCardChange={(newActiveCardIndex) => this.onCardChange(newActiveCardIndex)} />
 						<MobilePayment activeCard={activeCard} />
 						<Withdraw
 							activeCard={activeCard}
-							inactiveCardsList={inactiveCardsList}
-						/>
+							inactiveCardsList={inactiveCardsList} />
 					</Workspace>
 				</CardPane>
 			</Wallet>

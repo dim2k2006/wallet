@@ -1,4 +1,3 @@
-import {validate, presence} from 'property-validator';
 import FileModel from '../common/fileModel';
 import ApplicationError from '../../../libs/applicationError';
 

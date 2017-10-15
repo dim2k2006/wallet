@@ -102,7 +102,7 @@ class Card extends Component {
 			return (
 				<CardLayout active={true} bgColor={bgColor}>
 					<CardLogo url={bankLogoUrl} active={true} />
-					<CardSelect defaultValue='0' onChange={(activeCardIndex) => this.onCardChange(activeCardIndex)}>
+					<CardSelect defaultValue='0' onChange={(index) => this.onCardChange(index)}>
 						{data.map((card, index) => (
 							<Select.Option key={index} value={`${index}`}>{card.number}</Select.Option>
 						))}

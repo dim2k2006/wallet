@@ -179,10 +179,10 @@ class MobilePaymentContract extends Component {
 }
 
 MobilePaymentContract.propTypes = {
-	activeCard: PropTypes.shape({
-		id: PropTypes.number,
-		theme: PropTypes.object
-	}).isRequired,
+	// activeCard: PropTypes.shape({
+	// 	id: PropTypes.number,
+	// 	theme: PropTypes.object
+	// }).isRequired,
 	onPaymentSuccess: PropTypes.func.isRequired
 };
 

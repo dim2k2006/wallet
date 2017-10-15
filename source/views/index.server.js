@@ -4,6 +4,8 @@ import {extractCritical} from 'emotion-server';
 import serialize from 'serialize-javascript';
 import App from '../client/components/App';
 
+/* eslint-disable react/no-danger */
+
 export default function (appData) {
 	const app = renderToString(<App data={appData} />);
 	const {html, ids, css} = extractCritical(app);
@@ -27,3 +29,5 @@ export default function (appData) {
 		</html>
 	);
 }
+
+/* eslint-enable react/no-danger */

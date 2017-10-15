@@ -2,7 +2,8 @@
   "extends": "airbnb",
 
   "globals": {
-	"document": true
+	"document": true,
+	"window": true
   },
 
   "rules": {
@@ -13,7 +14,7 @@
 	"arrow-parens": [2, "always"],
 	"no-underscore-dangle": [2, {"allowAfterThis": true}],
 	"max-len": [2, 120, 4, {"ignoreUrls": true}],
-	"no-confusing-arrow": [2, {"allowParens": true}],
+	"no-confusing-arrow": 0,
 	"object-curly-spacing": [2, "never"],
 
 	"import/no-extraneous-dependencies": 0,
@@ -27,6 +28,8 @@
 	"react/jsx-closing-bracket-location": [1, "after-props"],
 	"react/require-default-props": 0,
 	"react/no-array-index-key": 0,
+	"react/jsx-boolean-value": 0,
+	"react/forbid-prop-types": 0,
 
 	"jsx-a11y/href-no-hash": "off",
 	"jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
