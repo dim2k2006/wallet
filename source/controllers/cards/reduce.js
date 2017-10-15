@@ -9,7 +9,7 @@ import ApplicationError from '../../../libs/applicationError';
 const reduceCardController = async (ctx) => {
 	const cardId = Number(ctx.params.id);
 	const amount = Number(ctx.request.body.amount);
-	const data = Number(ctx.request.body.data);
+	const data = ctx.request.body.data;
 	const cardData = {
 		cardId,
 		amount,
