@@ -8,7 +8,8 @@
     "build": "webpack --env production && webpack --env server",
     "server": "node ./source/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-	"eslint": "eslint ./source/**"
+	"eslint": "eslint ./source/**",
+	"precommit": "npm run eslint"
   },
   "repository": {
     "type": "git",
