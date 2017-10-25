@@ -1,15 +1,15 @@
-import FileModel from '../common/fileModel';
+import DbModel from '../common/dbModel';
 import ApplicationError from '../../../libs/applicationError';
 
 /**
  * Create a new Cards class
  */
-class Cards extends FileModel {
+class Cards extends DbModel {
 	/**
 	 * Constructor
 	 */
 	constructor() {
-		super('cards.json');
+		super('card');
 	}
 
 	/**
@@ -27,20 +27,19 @@ class Cards extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(card) {
-		const id = this._generateId();
+		const id = await this._generateId();
 		let newCard = {};
 
 		const existingCard = this._dataSource.find((item) => item.cardNumber === card.cardNumber);
 
 		if (!existingCard) {
 			newCard = {...card, id};
-			this._dataSource.push(newCard);
 		} else {
 			existingCard.balance = card.balance;
 			newCard = existingCard;
 		}
 
-		await this._saveUpdates();
+		await this._insert(newCard);
 
 		return newCard;
 	}
@@ -50,16 +49,13 @@ class Cards extends FileModel {
 	 * @param {Number} id
 	 */
 	async remove(id) {
-		const card = this._dataSource.find((item) => item.id === id);
+		const card = await this.get(id);
 
 		if (!card) {
 			throw new ApplicationError(`Card with ID=${id} not found`, 404);
 		}
 
-		const cardIndex = this._dataSource.indexOf(card);
-
-		this._dataSource.splice(cardIndex, 1);
-		await this._saveUpdates();
+		await this._remove(id);
 	}
 
 	/**
@@ -72,18 +68,9 @@ class Cards extends FileModel {
 		const amount = cardData.amount;
 		const card = await this.get(id);
 
-		if (!card) {
-			throw new ApplicationError(`Card with ID=${id} not found`, 404);
-		}
+		const newBalance = Number(card.balance) - Number(amount);
 
-		const balance = card.balance;
-		const diff = balance - amount;
-
-		const newBalance = diff > 0 ? diff : 0;
-
-		card.balance = newBalance;
-
-		await this._saveUpdates();
+		await this._update({id}, {balance: newBalance});
 	}
 
 	/**
@@ -96,9 +83,9 @@ class Cards extends FileModel {
 		const amount = cardData.amount;
 		const card = await this.get(id);
 
-		card.balance = Number(card.balance) + Number(amount);
+		const newBalance = Number(card.balance) + Number(amount);
 
-		await this._saveUpdates();
+		await this._update({id}, {balance: newBalance});
 	}
 }
 

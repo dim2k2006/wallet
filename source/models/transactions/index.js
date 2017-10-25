@@ -1,15 +1,15 @@
-import FileModel from '../common/fileModel';
+import DbModel from '../common/dbModel';
 import ApplicationError from '../../../libs/applicationError';
 
 /**
  * Create a new Transactions class
  */
-class Transactions extends FileModel {
+class Transactions extends DbModel {
 	/**
 	 * Constructor
 	 */
 	constructor() {
-		super('transactions.json');
+		super('transaction');
 	}
 
 	/**
@@ -18,11 +18,10 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async create(transactionData) {
-		const id = this._generateId();
+		const id = await this._generateId();
 		const newTransaction = {...transactionData, id};
 
-		this._dataSource.push(newTransaction);
-		await this._saveUpdates();
+		await this._insert(newTransaction);
 
 		return newTransaction;
 	}
@@ -33,10 +32,9 @@ class Transactions extends FileModel {
 	 * @returns {Object}
 	 */
 	async get(cardId) {
-		const sourceData = await this.getAll();
-		const data = sourceData.filter((item) => item.cardId === cardId);
+		const item = await this.getBy({cardId});
 
-		return data;
+		return item;
 	}
 
 	/**
