@@ -5,3 +5,4 @@ Thumbs.db
 *.sublime*
 *.log
 npm-debug.log*
+scripts/tls/fixtures/
